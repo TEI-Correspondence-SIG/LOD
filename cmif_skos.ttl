@@ -1,0 +1,97 @@
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix cc: <http://creativecommons.org/ns#> .
+
+# CMIF namespace
+@prefix cmif: <URI-of-CMIF> .
+@prefix terms: <URI-of-CMIF/terms/>
+
+# Metadata
+
+ <URI-of-CMIF/terms> a skos:ConceptScheme ;
+  # Da braucht es einen besseren Titel
+   dct:title "CMIF terms" ;
+   # dc:description ""@de ;
+   dc:publisher "Correspondence SIG" ;
+   dc:contributor "contributor" ;
+   dc:subject "Correspondence"@en ;
+   cc:license <http://creativecommons.org/licenses/by/3.0/> ;
+   rdfs:seeAlso <URL zum Handbuchartikel> ;
+   skos:hasTopConcept terms:concept , terms:draft , terms:manuscript , terms:copy , terms:print , terms:record , terms:abstract , terms:transcription , terms:comment , terms:facsimile .
+
+# Konzepte
+
+
+#Tabelle 2: Definition der Textgrundlage-Typen
+
+#cmif:concept
+terms:concept a skos:Concept ;
+  skos:inScheme terms: ;
+  skos:prefLabel "Konzept"@de .
+
+
+#cmif:draft
+terms:draft a skos:Concept ;
+  skos:inScheme terms: ;
+  skos:prefLabel "Entwurf"@de .
+
+#cmif:manuscript
+terms:manuscript a skos:Concept ;
+  skos:inScheme terms: ;
+  skos:prefLabel "Handschrift"@de .
+
+#cmif:copy
+terms:copy a skos:Concept ;
+  skos:inScheme terms: ;
+  skos:prefLabel "Abschrift"@de ;
+  skos:note "unspezifiziert, umfasst alle Abschriftstypen" ;
+  skos:narrower terms:copy-by-addressee , terms:copy-by-third .
+
+
+#cmif:copy-by-addressee Abschrift durch den Absender (veranlasst)
+terms:copy-by-addressee a skos:Concept ;
+  skos:inScheme terms: ;
+  skos:prefLabel "Abschrift durch den Empfänger (veranlasst)"@de ;
+  skos:broader terms:copy .
+
+#cmif:copy-by-third
+terms:copy-by-third a skos:Concept ;
+  skos:inScheme terms: ;
+  skos:prefLabel "Abschrift durch einen Dritten"@de ;
+  skos:broader terms:copy .
+
+#cmif:print
+terms:print a skos:Concept ;
+  skos:inScheme terms: ;
+  skos:prefLabel "Druck"@de ;
+  skos:note "Textbasis nur gedruckt überliefert"@de .
+
+#Tabelle 3: Definition des Erschließungsumfangs
+
+#cmif:record
+terms:record a skos:Concept ;
+  skos:inScheme terms: ;
+  skos:prefLabel "Datensatz"@de ;
+  skos:note "(nur Nachweis)"@de .
+
+#cmif:abstract
+terms:abstract a skos:Concept ;
+  skos:inScheme terms: ;
+  skos:prefLabel "Regest"@de .
+
+#cmif:transcription
+terms:transcription a skos:Concept ;
+  skos:inScheme terms: ;
+  skos:prefLabel "Transkription"@de .
+
+#cmif:comment
+terms:comment a skos:Concept ;
+    skos:inScheme terms: ;
+    skos:prefLabel "Sachkommentar"@de .
+
+#cmif:facsimile
+terms:facsimile a skos:Concept ;
+    skos:inScheme terms: ;
+    skos:prefLabel "Digitales Faksimile"@de .
