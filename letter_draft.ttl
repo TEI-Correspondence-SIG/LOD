@@ -1,0 +1,72 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix crm: <http://www.cidoc-crm.org/cidoc-crm/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix schema: <http://schema.org/> .
+# Hier CMIF-Vokabular-URI
+@prefix cmif: <URI_zum_CMIF-VOKABULAR> .
+
+<Brief-URI> rdf:type crm:E73_Information_Object ;
+  rdfs:label "Brief X an Y, TT. MM. JJJJ"@de ;
+
+
+  # Klassifizierung des Information Objects als Brief, hier cmif-Taxonomie, bsp. "Postkarte"
+  crm:P2_has_type cmif:Letter ;
+
+  # Creation Event
+  crm:P94i_was_created_by [
+    rdf:type crm:E65_Creation ;
+    crm:P14_carried_out_by <CREATOR-URI> ] ;
+
+  # Sendeaktivität
+  crm:P12i_was_present_at [
+    a crm:E7_Activity ;
+    rdfs:label "Versenden des Briefes {Brief-URI}"@de ;
+    # Hier fehlt der cmif:Vokabulareintrag "SendingOfLetter"
+    crm:P2_has_type cmif:SendingOfLetter ;
+    #entspricht Sender
+    crm:P14_carried_out_by <URI des Senders> ;
+    crm:P7_took_place_at <URI des Versendeorts> ;
+    # Datierung der Sendeaktivität
+    crm:P4_has_time-span [
+      rdf:type crm:E52_Time-Span ;
+      crm:P82a_begin_of_the_begin "JJJJ-MM-TT"^^xsd:date ;
+      crm:P82b_end_of_the_end "JJJJ-MM-TT"^^xsd:date
+    ]
+  ] ;
+
+# Empfangsaktivität
+
+  crm:P12i_was_present_at [
+    rdf:type crm:E7_Activity ;
+    rdfs:label "Empfang des Briefes {Brief-URI}"@de ;
+
+    # Hier fehlt der cmif:Vokabulareintrag "ReceifingOfLetter"
+    crm:P2_has_type cmif:ReceivingOfLetter> ;
+    # Empfänger
+    crm:P14_carried_out_by <URI-Empfänger> ;
+    # Empfangsort
+    crm:P7_took_place_at <URI Empfangsort>
+    # ließe sich analog zur Versende-Aktivität datieren
+  ] ;
+
+
+  # Signaturen usw.
+  crm:P1_is_identified_by [
+    rdf:type crm:E42_Identifier
+    # ...
+    ] ;
+
+
+
+  # "Links" auf andere Repräsentationen
+
+  # Menschenlesbare Repräsentationen
+  rdfs:seeAlso <URL einer Seite mit dem Brief> ;
+
+  # Der selbe Brief woanders als LOD ...
+  owl:sameAs <URI vom Brief woanders> ;
+
+  # Erwähnungen entweder mit schema.org schema:mentions oder die vorgeschlagenen cmif-Werte cmif:cmif:mentionsPerson ...
+  schema:mentions <URI der erwähnten Person1>, <URI der erwähnten Person2> .
